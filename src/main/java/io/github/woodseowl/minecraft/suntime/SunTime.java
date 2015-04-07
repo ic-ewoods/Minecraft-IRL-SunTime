@@ -2,8 +2,6 @@ package io.github.woodseowl.minecraft.suntime;
 
 import org.bukkit.World;
 
-import java.util.Calendar;
-
 public class SunTime {
 
     private final MinecraftTime minecraftTime;
@@ -26,21 +24,27 @@ public class SunTime {
         return realTime.getTime();
     }
 
-    public String getRealMinecraftTime() {
-        return realTime.getMinecraftFormatTime();
+    public String getRealDayTime() {
+        return getRealDayTimeLong().toString();
     }
 
-    public String getRealDayTime() {
+    public Long getRealDayTimeLong() {
+        long daytime;
         if (realTime.isDay()) {
             double dayFraction = realTime.getDayFraction();
-            Integer daytime = minecraftTime.calculateDayTime(dayFraction);
-            return daytime.toString();
+            daytime = minecraftTime.calculateDayTime(dayFraction);
         } else {
             double nightFraction = realTime.getNightFraction();
-            Integer daytime = minecraftTime.calculateNightTime(nightFraction);
-            return daytime.toString();
+            daytime = minecraftTime.calculateNightTime(nightFraction);
         }
-
+        return daytime;
     }
 
+    public String getSunriseTime() {
+        return realTime.getSunriseTime();
+    }
+
+    public String getSunsetTime() {
+        return realTime.getSunsetTime();
+    }
 }

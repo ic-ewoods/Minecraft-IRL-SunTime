@@ -12,9 +12,13 @@ public class RealTime {
 
 
     public RealTime(SunCalculator sunCalculator) {
-        realTime = Calendar.getInstance();
-        sunrise = sunCalculator.getSunrise();
-        sunset = sunCalculator.getSunset();
+        this(Calendar.getInstance(), sunCalculator.getSunrise(), sunCalculator.getSunset());
+    }
+
+    public RealTime(Calendar realTime, Calendar sunrise, Calendar sunset) {
+        this.realTime = realTime;
+        this.sunrise = sunrise;
+        this.sunset = sunset;
     }
 
     public String getTime() {
@@ -34,18 +38,23 @@ public class RealTime {
     }
 
     public double getDayFraction() {
-        long timeSinceSunrise = realTime.getTimeInMillis() - sunrise.getTimeInMillis();
-        return timeSinceSunrise / (getLengthOfDayInMillis() * 1.0);
+        if (isDay()) {
+            long timeSinceSunrise = realTime.getTimeInMillis() - sunrise.getTimeInMillis();
+            return timeSinceSunrise / (getLengthOfDayInMillis() * 1.0);
+        }
+        return 0.0;
     }
 
     public double getNightFraction() {
         if (realTime.after(sunset)) {
             long timeSinceSunset = realTime.getTimeInMillis() - sunset.getTimeInMillis();
             return timeSinceSunset / (getLengthOfNightInMillis() * 1.0);
-        } else {
+        }
+        if (realTime.before(sunrise)) {
             long timeBeforeSunrise = sunrise.getTimeInMillis() - realTime.getTimeInMillis();
             return (getLengthOfNightInMillis() - timeBeforeSunrise) / (getLengthOfNightInMillis() * 1.0);
         }
+        return 0.0;
     }
 
     private long getLengthOfDayInMillis() {
@@ -54,5 +63,15 @@ public class RealTime {
 
     private long getLengthOfNightInMillis() {
         return TimeUnit.DAYS.toMillis(1) - getLengthOfDayInMillis();
+    }
+
+    public String getSunriseTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        return dateFormat.format(sunrise.getTime());
+    }
+
+    public String getSunsetTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        return dateFormat.format(sunset.getTime());
     }
 }

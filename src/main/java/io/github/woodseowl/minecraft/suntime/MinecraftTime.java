@@ -10,7 +10,11 @@ public class MinecraftTime {
     private final Long worldTime;
 
     public MinecraftTime(World world) {
-        worldTime = world.getTime();
+        this(world.getTime());
+    }
+
+    public MinecraftTime(Long worldTime) {
+        this.worldTime = worldTime;
     }
 
     public String getDayTime() {
