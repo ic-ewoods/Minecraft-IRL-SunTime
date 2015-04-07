@@ -33,18 +33,18 @@ public class RealTime {
         return realTime.after(sunrise) && realTime.before(sunset);
     }
 
-    public long getDayFraction() {
+    public double getDayFraction() {
         long timeSinceSunrise = realTime.getTimeInMillis() - sunrise.getTimeInMillis();
-        return timeSinceSunrise / getLengthOfDayInMillis();
+        return timeSinceSunrise / (getLengthOfDayInMillis() * 1.0);
     }
 
-    public long getNightFraction() {
+    public double getNightFraction() {
         if (realTime.after(sunset)) {
             long timeSinceSunset = realTime.getTimeInMillis() - sunset.getTimeInMillis();
-            return timeSinceSunset / getLengthOfNightInMillis();
+            return timeSinceSunset / (getLengthOfNightInMillis() * 1.0);
         } else {
             long timeBeforeSunrise = sunrise.getTimeInMillis() - realTime.getTimeInMillis();
-            return (getLengthOfNightInMillis() - timeBeforeSunrise) / getLengthOfNightInMillis();
+            return (getLengthOfNightInMillis() - timeBeforeSunrise) / (getLengthOfNightInMillis() * 1.0);
         }
     }
 

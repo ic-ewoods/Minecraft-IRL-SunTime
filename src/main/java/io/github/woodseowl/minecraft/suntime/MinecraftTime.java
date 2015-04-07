@@ -17,15 +17,15 @@ public class MinecraftTime {
         return worldTime.toString();
     }
 
-    public int calculateDayTime(long dayFraction) {
-        return Math.round(getLengthOfDay() * dayFraction) + SUNRISE;
+    public int calculateDayTime(double dayFraction) {
+        return (int)Math.round(getLengthOfDay() * dayFraction) + SUNRISE;
     }
 
-    public int calculateNightTime(long nightFraction) {
-        return Math.round(getLengthOfNight() * nightFraction) + SUNSET;
+    public int calculateNightTime(double nightFraction) {
+        return (int)Math.round(getLengthOfNight() * nightFraction) + SUNSET;
     }
 
-    private long getLengthOfDay() {
+    private Integer getLengthOfDay() {
         return SUNSET - SUNRISE;
     }
 
