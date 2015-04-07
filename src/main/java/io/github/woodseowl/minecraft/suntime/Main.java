@@ -7,21 +7,14 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         World world = getServer().getWorlds().get(0);
-        TimeHelpers time = new TimeHelpers(world);
+        SunTime sunTime = new SunTime(world);
 
         world.setGameRuleValue("doDaylightCycle", "false");
-
-        getLogger().info("SunTime thinks it is " + time.getRealTimeString());
-
-        getLogger().info("SunTime thinks the real time is " + time.getRealTimeLong());
-
-        getLogger().info("SunTime thinks the server time is " + time.getWorldTime());
-
-        getLogger().info("SunTime thinks the server full time is " + time.getWorldFullTime());
-
-        getLogger().info("SunTime wants to set the server time to " + time.convertRealTimeToWorldTime(time.getRealTimeLong()));
-
         getLogger().info("DaylightCycle status is " + world.getGameRuleValue("doDaylightCycle"));
+
+        getLogger().info("SunTime thinks the daytime is " + sunTime.getDayTime());
+        getLogger().info("SunTime thinks the real time is " + sunTime.getRealTime() + " [" + sunTime.getRealMinecraftTime() + "]");
+        getLogger().info("SunTime wants to set the server time to " + sunTime.getRealDayTime());
 
     }
 }
