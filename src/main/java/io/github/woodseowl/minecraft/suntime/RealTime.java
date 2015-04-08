@@ -2,6 +2,7 @@ package io.github.woodseowl.minecraft.suntime;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 public class RealTime {
@@ -11,8 +12,8 @@ public class RealTime {
     private final Calendar sunset;
 
 
-    public RealTime(SunCalculator sunCalculator) {
-        this(Calendar.getInstance(), sunCalculator.getSunrise(), sunCalculator.getSunset());
+    public RealTime(SunCalculator sunCalculator, TimeZone timeZone) {
+        this(Calendar.getInstance(timeZone), sunCalculator.getSunrise(), sunCalculator.getSunset());
     }
 
     public RealTime(Calendar realTime, Calendar sunrise, Calendar sunset) {
@@ -24,13 +25,6 @@ public class RealTime {
     public String getTime() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
         return dateFormat.format(realTime.getTime());
-    }
-
-    public String getMinecraftFormatTime() {
-        int hour = realTime.get(Calendar.HOUR_OF_DAY);
-        double minute = realTime.get(Calendar.MINUTE) / 60.0;
-        Long minecraftTime = Math.round((hour + minute) * 1000);
-        return minecraftTime.toString();
     }
 
     public boolean isDay() {

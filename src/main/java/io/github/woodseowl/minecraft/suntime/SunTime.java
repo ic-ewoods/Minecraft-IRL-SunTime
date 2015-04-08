@@ -2,18 +2,25 @@ package io.github.woodseowl.minecraft.suntime;
 
 import org.bukkit.World;
 
+import java.util.TimeZone;
+
 public class SunTime {
 
-    private final MinecraftTime minecraftTime;
     public final RealTime realTime;
+    private final MinecraftTime minecraftTime;
 
-    public SunTime(World world) {
-        this(world, new SunCalculator());
+    public SunTime(MinecraftTime minecraftTime, RealTime realTime) {
+        this.minecraftTime = minecraftTime;
+        this.realTime = realTime;
     }
 
-    public SunTime(World world, SunCalculator sunCalculator) {
-        minecraftTime = new MinecraftTime(world);
-        realTime = new RealTime(sunCalculator);
+    public static SunTime getInstance(World world) {
+        TimeZone timeZone = TimeZone.getTimeZone("America/New_York");
+        SunCalculator sunCalculator = new SunCalculator("42", "-72", timeZone);
+        MinecraftTime minecraftTime = new MinecraftTime(world.getTime());
+        RealTime realTime = new RealTime(sunCalculator, timeZone);
+
+        return new SunTime(minecraftTime, realTime);
     }
 
     public String getDayTime() {

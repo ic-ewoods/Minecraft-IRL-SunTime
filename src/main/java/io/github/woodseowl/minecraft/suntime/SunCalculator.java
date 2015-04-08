@@ -4,21 +4,23 @@ import com.luckycatlabs.sunrisesunset.SunriseSunsetCalculator;
 import com.luckycatlabs.sunrisesunset.dto.Location;
 
 import java.util.Calendar;
+import java.util.TimeZone;
 
 public class SunCalculator {
 
+    private final TimeZone timeZone;
     private SunriseSunsetCalculator calculator;
 
-    public SunCalculator() {
-        Location location = new Location("42", "-76");
-        calculator = new SunriseSunsetCalculator(location, "America/New_York");
+    public SunCalculator(String latitude, String longitude, TimeZone timeZone) {
+        this.timeZone = timeZone;
+        calculator = new SunriseSunsetCalculator(new Location(latitude, longitude), timeZone);
     }
 
     public Calendar getSunrise() {
-        return calculator.getOfficialSunriseCalendarForDate(Calendar.getInstance());
+        return calculator.getOfficialSunriseCalendarForDate(Calendar.getInstance(timeZone));
     }
 
     public Calendar getSunset() {
-        return calculator.getOfficialSunsetCalendarForDate(Calendar.getInstance());
+        return calculator.getOfficialSunsetCalendarForDate(Calendar.getInstance(timeZone));
     }
 }

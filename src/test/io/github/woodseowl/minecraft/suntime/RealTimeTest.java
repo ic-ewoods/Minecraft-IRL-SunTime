@@ -5,8 +5,9 @@ import org.junit.Test;
 
 import java.util.Calendar;
 
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class RealTimeTest {
 
@@ -33,11 +34,6 @@ public class RealTimeTest {
     @Test
     public void testGetTime() throws Exception {
         assertThat(realTime.getTime(), equalTo("15:00"));
-    }
-
-    @Test
-    public void testGetMinecraftFormatTime() throws Exception {
-        assertThat(realTime.getMinecraftFormatTime(), equalTo("15000"));
     }
 
     @Test

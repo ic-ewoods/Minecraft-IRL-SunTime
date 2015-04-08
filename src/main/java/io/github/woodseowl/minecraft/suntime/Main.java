@@ -11,19 +11,19 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         World world = getServer().getWorlds().get(0);
-        SunTime sunTime = new SunTime(world);
+        SunTime sunTime = SunTime.getInstance(world);
         Logger logger = getLogger();
 
         world.setGameRuleValue("doDaylightCycle", "false");
-        logger.info("DaylightCycle status is " + world.getGameRuleValue("doDaylightCycle"));
+        logger.info("DaylightCycle game rule is " + world.getGameRuleValue("doDaylightCycle"));
 
         logger.info("SunTime thinks the daytime is " + sunTime.getDayTime());
         logger.info("SunTime thinks the real time is " + sunTime.getRealTime());
         logger.info("Sunrise: " + sunTime.getSunriseTime());
         logger.info("Sunset: " + sunTime.getSunsetTime());
-        logger.info("SunTime wants to set the server time to " + sunTime.getRealDayTime());
+        logger.info("SunTime will set the server time to " + sunTime.getRealDayTime());
 
-        // world.setTime(sunTime.getRealDayTimeLong());
+        world.setTime(sunTime.getRealDayTimeLong());
 
         BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
         scheduler.scheduleSyncRepeatingTask(this, new Clock(world, logger), 0L, 60 * 20L);

@@ -15,7 +15,8 @@ public final class Clock implements Runnable {
     }
 
     public void run() {
-        SunTime sunTime = new SunTime(world);
+        SunTime sunTime = SunTime.getInstance(world);
+
         world.setTime(sunTime.getRealDayTimeLong());
         logger.info("SunTime set the server time to " + sunTime.getRealDayTime());
     }
