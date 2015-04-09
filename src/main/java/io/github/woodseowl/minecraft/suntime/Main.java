@@ -5,6 +5,7 @@ import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
 
+import java.util.Stack;
 import java.util.logging.Logger;
 
 public class Main extends JavaPlugin {
@@ -28,5 +29,14 @@ public class Main extends JavaPlugin {
         BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
         scheduler.scheduleSyncRepeatingTask(this, new Clock(world, logger), 0L, 60 * 20L);
 
+        logger.info("Weather gonna try...");
+        Weather weather = new Weather();
+        try {
+            CurrentObservation observation = weather.getCurrentObservation();
+            logger.info("Weather: " + observation.toString());
+        } catch (Exception e) {
+            logger.info("Weather could not be retrieved: " + e.getMessage());
+        }
     }
+
 }
