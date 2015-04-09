@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import java.util.Calendar;
 
-import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.startsWith;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
@@ -33,7 +33,7 @@ public class RealTimeTest {
 
     @Test
     public void testGetTime() throws Exception {
-        assertThat(realTime.getTime(), equalTo("15:00"));
+        assertThat(realTime.getTime(), startsWith("3:00 PM"));
     }
 
     @Test

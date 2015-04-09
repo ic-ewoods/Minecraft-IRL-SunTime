@@ -23,7 +23,7 @@ public class RealTime {
     }
 
     public String getTime() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("h:mm aa zzz");
         return dateFormat.format(realTime.getTime());
     }
 
@@ -60,12 +60,12 @@ public class RealTime {
     }
 
     public String getSunriseTime() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("h:mm aa zzz");
         return dateFormat.format(sunrise.getTime());
     }
 
     public String getSunsetTime() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("h:mm aa zzz");
         return dateFormat.format(sunset.getTime());
     }
 }

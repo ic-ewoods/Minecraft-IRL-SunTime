@@ -1,3 +1,18 @@
 name: SunTime
 main: io.github.woodseowl.minecraft.suntime.Main
 version: 1.0
+
+commands:
+  realweather:
+    description: Gets weather conditions IRL for the (possibly) configured latitude / longitude
+    usage: /realweather
+  realtime:
+    description: Tells the current time IRL
+    usage: /realtime
+  sunrise:
+    description: Time until / after sunrise IRL
+    usage: /sunrise
+  sunset:
+    description: Time until / after sunset IRL
+    usage: /sunset
+

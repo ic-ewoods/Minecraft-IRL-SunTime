@@ -48,10 +48,18 @@ public class SunTime {
     }
 
     public String getSunriseTime() {
-        return realTime.getSunriseTime();
+        if (realTime.isDay()) {
+            return "Sunrise IRL was at " + realTime.getSunriseTime();
+        } else {
+            return "Sunrise IRL will be at " + realTime.getSunriseTime();
+        }
     }
 
     public String getSunsetTime() {
-        return realTime.getSunsetTime();
+        if (realTime.isDay()) {
+            return "Sunset IRL will be at " + realTime.getSunsetTime();
+        } else {
+            return "Sunset IRL was at " + realTime.getSunsetTime();
+        }
     }
 }

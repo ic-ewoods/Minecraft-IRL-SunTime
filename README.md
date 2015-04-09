@@ -8,15 +8,18 @@ ToDo
 
 **Simple Commands**
  
- * realtime: print realtime to your console)
- * sunrise|sunset: print time since / until sunrise|sunset
+ * **DONE** realtime: print realtime to your console
+ * **DONE** sunrise|sunset: print time since / until sunrise|sunset
+ * **DONE** realweather: print weather conditions to your console
  
 **Configuration**
 
  - timezone
  - lat / lon
+ - weather station (or default to lat/lon)
  
 **Weather**
 
- - get realweather (WeatherUnderground API)
- 
+ - **DONE** get realweather (WeatherUnderground API)
+ - **DONE** update weather conditions in minecraft (storm, thundering)
+ - move to separate module
